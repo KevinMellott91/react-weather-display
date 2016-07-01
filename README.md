@@ -1,0 +1,22 @@
+## React Weather Display
+This React component provides a basic display of weather information, similar
+to something that you might see on a weather forecast.
+
+### Live Demo
+View the [live demo](https://run.plnkr.co/plunks/SYkIZmFFL8tCHnTHMGJY/)! Note that this demo uses pre-compiled code, so it's a little messy to examine.
+
+### Installation
+```
+npm install react-weather-display
+```
+
+### Example Usage
+You can run built-in demo example via few simple steps:<br />
+1. `git clone https://github.com/KevinMellott91/react-weather-display.git`<br />
+2. `cd react-weather-display`<br />
+3. `npm install`<br />
+4. `npm run-script basic-example`<br />
+5. Browse to http://localhost:3000
+
+### Component (primary) properties
+- `currentTemperature` (Integer) - actual temperature detected for the location

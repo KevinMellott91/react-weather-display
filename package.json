@@ -1,0 +1,62 @@
+{
+  "name": "react-weather-display",
+  "version": "0.0.1",
+  "description": "A React.js component for displaying basic weather conditions.",
+  "main": "dist/react-weather-display.js",
+  "scripts": {
+    "basic-example": "npm run compile && browserify -t [ babelify --presets [ react ] ] example/js/index.js -o example/js/bundle.js && node example/js/basic.js",
+    "compile": "babel --presets react src/react-weather-display.js --out-file dist/react-weather-display.js",
+    "prepublish": "npm run compile"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevinmellott91/react-weather-display.git"
+  },
+  "keywords": [
+    "React.js",
+    "React",
+    "html",
+    "weather",
+    "forecast",
+    "component",
+    "react-component"
+  ],
+  "author": "Kevin Mellott <kevin.r.mellott@gmail.com> (https://www.github.com/kevinmellott91)",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/kevinmellott91/react-weather-display/blob/master/LICENSE"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/kevinmellott91/react-weather-display/issues"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "homepage": "https://github.com/kevinmellott91/react-weather-display",
+  "devDependencies": {
+    "babel-preset-react": "6.5.0",
+    "babel-cli": "6.5.0",
+    "babelify": "7.2.0",
+    "browserify": "13.0.0",
+    "eslint": "^2.4.0",
+    "eslint-config-airbnb": "^6.2.0",
+    "eslint-plugin-react": "^4.2.3",
+    "express": "4.13.4",
+    "path": "0.12.7",
+    "react": "0.14.7",
+    "react-dom": "0.14.7"
+  },
+  "peerDependencies": {},
+  "browserDependencies": {},
+  "dependencies": {
+    "react": "0.14.7"
+  }
+}
