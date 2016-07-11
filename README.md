@@ -3,7 +3,7 @@ This React component provides a basic display of weather information, similar
 to something that you might see on a weather forecast.
 
 ### Live Demo
-View the [live demo](https://run.plnkr.co/plunks/SYkIZmFFL8tCHnTHMGJY/)! Note that this demo uses pre-compiled code, so it's a little messy to examine.
+View the [live demo](https://run.plnkr.co/plunks/c752wk/)! Note that this demo uses pre-compiled code, so it's a little messy to examine.
 
 ### Installation
 ```
