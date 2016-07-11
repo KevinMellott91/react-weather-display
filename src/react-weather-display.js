@@ -30,11 +30,24 @@ class WeatherDisplay extends React.Component {
   }
 
   render() {
+    const width = this.props.width * 0.6;
+    console.log(width);
     // Piece it all together to form the weather display.
     return (
-      <div>
+      <div style={{
+        width:this.props.width,
+        height:this.props.height,
+        position:"relative",
+        margin:"auto"
+      }}>
         <h1 id="weatherValue">{this.props.currentTemperature}</h1>
-        <img id="weatherImage" src={this.getForecastImage()} />
+        <img id="weatherImage" src={this.getForecastImage()} style={{
+          width,
+          height:width,
+          position:"absolute",
+          left:(this.props.width - width) / 2,
+          top:(this.props.height - width) / 2
+        }} />
       </div>
     );
   }

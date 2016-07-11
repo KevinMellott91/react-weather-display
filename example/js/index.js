@@ -31,7 +31,7 @@ class App extends React.Component {
     return (
       <div>
         <h1 className="cover-heading space-after">react-weather-display</h1>
-        <WeatherDisplay height="400px" width="400px"
+        <WeatherDisplay height="400" width="400"
           currentTemperature={this.state.currentTemperature}
           currentCondition={this.state.currentCondition}
         />
