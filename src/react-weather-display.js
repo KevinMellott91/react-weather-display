@@ -12,17 +12,17 @@ class WeatherDisplay extends React.Component {
         userSelect: 'none',
       },
       weatherSprite: {
-        backgroundImage: 'url(PASTE_HERE)',
+        backgroundImage: 'url(https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/weather-sprite.png)',
       },
       spriteWeatherSunny: {
-      	width: '125px',
-      	height: '125px',
-      	backgroundPosition: '-15px -15px',
+        width: '125px',
+        height: '125px',
+        backgroundPosition: '-15px -15px',
       },
       spriteWeatherCloudy: {
-      	width: '155px',
-      	height: '100px',
-      	backgroundPosition: '-150px -20px',
+        width: '155px',
+        height: '100px',
+        backgroundPosition: '-150px -20px',
       },
     };
   }
@@ -48,19 +48,29 @@ class WeatherDisplay extends React.Component {
     // Piece it all together to form the weather display.
     return (
       <div style={{
-        width:this.props.width,
-        height:this.props.height,
-        position:"relative",
-        margin:"auto"
-      }}>
+        width: this.props.width,
+        height: this.props.height,
+        position: 'relative',
+        margin: 'auto',
+      }}
+      >
         <h1 id="weatherValue">{this.props.currentTemperature}</h1>
+        <div style= {{
+          backgroundImage: 'url(https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/weather-sprite.png)',
+          width: '300px',
+          height: '300px',
+          backgroundPosition: '0px 0px',
+        }}
+        >
+        </div>
         <img id="weatherImage" src={this.getForecastImage()} style={{
           width,
-          height:width,
-          position:"absolute",
-          left:(this.props.width - width) / 2,
-          top:(this.props.height - width) / 2
-        }} />
+          height: width,
+          position: 'absolute',
+          left: (this.props.width - width) / 2,
+          top: (this.props.height - width) / 2,
+        }}
+        />
       </div>
     );
   }

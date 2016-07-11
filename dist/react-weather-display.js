@@ -10,6 +10,19 @@ class WeatherDisplay extends React.Component {
         MozUserSelect: 'none',
         msUserSelect: 'none',
         userSelect: 'none'
+      },
+      weatherSprite: {
+        backgroundImage: 'url(https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/weather-sprite.png)'
+      },
+      spriteWeatherSunny: {
+        width: '125px',
+        height: '125px',
+        backgroundPosition: '-15px -15px'
+      },
+      spriteWeatherCloudy: {
+        width: '155px',
+        height: '100px',
+        backgroundPosition: '-150px -20px'
       }
     };
   }
@@ -38,21 +51,30 @@ class WeatherDisplay extends React.Component {
       { style: {
           width: this.props.width,
           height: this.props.height,
-          position: "relative",
-          margin: "auto"
-        } },
+          position: 'relative',
+          margin: 'auto'
+        }
+      },
       React.createElement(
         'h1',
         { id: 'weatherValue' },
         this.props.currentTemperature
       ),
+      React.createElement('div', { style: {
+          backgroundImage: 'url(https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/weather-sprite.png)',
+          width: '300px',
+          height: '300px',
+          backgroundPosition: '0px 0px'
+        }
+      }),
       React.createElement('img', { id: 'weatherImage', src: this.getForecastImage(), style: {
           width,
           height: width,
-          position: "absolute",
+          position: 'absolute',
           left: (this.props.width - width) / 2,
           top: (this.props.height - width) / 2
-        } })
+        }
+      })
     );
   }
 }
