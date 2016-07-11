@@ -55,6 +55,7 @@ class App extends React.Component {
                 <option value="cloudy">Cloudy</option>
                 <option value="rainy">Rainy</option>
                 <option value="stormy">Stormy</option>
+                <option value="snowy">Snowy</option>
               </select>
             </div>
           </div>

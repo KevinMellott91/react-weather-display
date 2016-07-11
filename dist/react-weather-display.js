@@ -10,19 +10,6 @@ class WeatherDisplay extends React.Component {
         MozUserSelect: 'none',
         msUserSelect: 'none',
         userSelect: 'none'
-      },
-      weatherSprite: {
-        backgroundImage: 'url(https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/weather-sprite.png)'
-      },
-      spriteWeatherSunny: {
-        width: '125px',
-        height: '125px',
-        backgroundPosition: '-15px -15px'
-      },
-      spriteWeatherCloudy: {
-        width: '155px',
-        height: '100px',
-        backgroundPosition: '-150px -20px'
       }
     };
   }
@@ -30,21 +17,23 @@ class WeatherDisplay extends React.Component {
   getForecastImage() {
     switch (this.props.currentCondition) {
       case 'sunny':
-        return 'http://images.clipartpanda.com/sun-clip-art-clipart-decorative-sun-256x256-b685.png';
+        return 'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/sunny.png';
       case 'cloudy':
-        return 'http://icons.veryicon.com/ico/Nature/Weather/Cloudy.ico';
+        return 'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/cloudy.png';
       case 'rainy':
-        return 'http://res.freestockphotos.biz/pictures/15/15144-illustration-of-a-stormy-cloud-with-heavy-rain-pv.png';
+        return 'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/rain.png';
       case 'stormy':
-        return 'http://cliparts.co/cliparts/ATb/Kqn/ATbKqn7ac.png';
+        return 'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/tstorms.png';
+      case 'snowy':
+        return 'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/snow.png';
       default:
-        return 'http://icons.veryicon.com/ico/Nature/Weather/Cloudy.ico';
+        return 'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/mostlysunny.png';
     }
   }
 
   render() {
     const width = this.props.width * 0.6;
-    console.log(width);
+    const fontsize = width * 0.25;
     // Piece it all together to form the weather display.
     return React.createElement(
       'div',
@@ -55,18 +44,6 @@ class WeatherDisplay extends React.Component {
           margin: 'auto'
         }
       },
-      React.createElement(
-        'h1',
-        { id: 'weatherValue' },
-        this.props.currentTemperature
-      ),
-      React.createElement('div', { style: {
-          backgroundImage: 'url(https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/weather-sprite.png)',
-          width: '300px',
-          height: '300px',
-          backgroundPosition: '0px 0px'
-        }
-      }),
       React.createElement('img', { id: 'weatherImage', src: this.getForecastImage(), style: {
           width,
           height: width,
@@ -74,7 +51,20 @@ class WeatherDisplay extends React.Component {
           left: (this.props.width - width) / 2,
           top: (this.props.height - width) / 2
         }
-      })
+      }),
+      React.createElement(
+        'h1',
+        { id: 'weatherValue', style: {
+            fontSize: fontsize,
+            position: 'relative',
+            top: (this.props.height - fontsize) / 2,
+            textShadow: `${ fontsize * 0.05 }px ${ fontsize * 0.05 }px #111111`,
+            color: 'white'
+          }
+        },
+        this.props.currentTemperature,
+        '\u00B0'
+      )
     );
   }
 }
@@ -87,7 +77,7 @@ WeatherDisplay.propTypes = {
   /* Actual temperature detected for the location */
   currentTemperature: React.PropTypes.number,
   /* The forcast to display */
-  currentCondition: React.PropTypes.oneOf(['sunny', 'cloudy', 'rainy', 'stormy'])
+  currentCondition: React.PropTypes.oneOf(['sunny', 'cloudy', 'rainy', 'stormy', 'snowy'])
 };
 
 WeatherDisplay.defaultProps = {
