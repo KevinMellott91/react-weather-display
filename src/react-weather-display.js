@@ -11,6 +11,19 @@ class WeatherDisplay extends React.Component {
         msUserSelect: 'none',
         userSelect: 'none',
       },
+      weatherSprite: {
+        backgroundImage: 'url(PASTE_HERE)',
+      },
+      spriteWeatherSunny: {
+      	width: '125px',
+      	height: '125px',
+      	backgroundPosition: '-15px -15px',
+      },
+      spriteWeatherCloudy: {
+      	width: '155px',
+      	height: '100px',
+      	backgroundPosition: '-150px -20px',
+      },
     };
   }
 
