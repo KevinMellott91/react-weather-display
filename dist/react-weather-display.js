@@ -14,31 +14,52 @@ class WeatherDisplay extends React.Component {
     };
   }
 
+  getForecastImage() {
+    switch (this.props.currentCondition) {
+      case 'sunny':
+        return 'http://images.clipartpanda.com/sun-clip-art-clipart-decorative-sun-256x256-b685.png';
+      case 'cloudy':
+        return 'http://icons.veryicon.com/ico/Nature/Weather/Cloudy.ico';
+      case 'rainy':
+        return 'http://res.freestockphotos.biz/pictures/15/15144-illustration-of-a-stormy-cloud-with-heavy-rain-pv.png';
+      case 'stormy':
+        return 'http://cliparts.co/cliparts/ATb/Kqn/ATbKqn7ac.png';
+      default:
+        return 'http://icons.veryicon.com/ico/Nature/Weather/Cloudy.ico';
+    }
+  }
+
   render() {
-    const _self = this;
-
-    // The styles change based on state.
-    const styles = this.getStyles();
-
     // Piece it all together to form the weather display.
     return React.createElement(
       'div',
       null,
-      this.props.currentTemperature
+      React.createElement(
+        'h1',
+        { id: 'weatherValue' },
+        this.props.currentTemperature
+      ),
+      React.createElement('img', { id: 'weatherImage', src: this.getForecastImage() })
     );
   }
 }
 
 WeatherDisplay.propTypes = {
+  /* Width of component in pixels */
+  width: React.PropTypes.number,
+  /* Height of component in pixels */
+  height: React.PropTypes.number,
   /* Actual temperature detected for the location */
   currentTemperature: React.PropTypes.number,
-  /* Current state of operations within the thermostat */
-  hvacMode: React.PropTypes.oneOf(['off', 'heating', 'cooling'])
+  /* The forcast to display */
+  currentCondition: React.PropTypes.oneOf(['sunny', 'cloudy', 'rainy', 'stormy'])
 };
 
 WeatherDisplay.defaultProps = {
-  currentTemperature: 74,
-  hvacMode: 'off'
+  width: 1280,
+  height: 720,
+  currentTemperature: 70,
+  currentCondition: 'sunny'
 };
 
 module.exports = WeatherDisplay;

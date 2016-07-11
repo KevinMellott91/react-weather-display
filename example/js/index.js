@@ -9,18 +9,18 @@ class App extends React.Component {
     super(props);
 
     // Bind to the event handlers.
-    this.handleHvacModeChange = this.handleHvacModeChange.bind(this);
+    this.handleForecastChange = this.handleForecastChange.bind(this);
     this.handleCurrentTemperatureChange = this.handleCurrentTemperatureChange.bind(this);
 
     // Set the initial state.
     this.state = {
       currentTemperature: 74,
-      hvacMode: 'off',
+      currentCondition: 'sunny',
     };
   }
 
-  handleHvacModeChange(event) {
-    this.setState({ hvacMode: event.target.value });
+  handleForecastChange(event) {
+    this.setState({ currentCondition: event.target.value });
   }
 
   handleCurrentTemperatureChange(event) {
@@ -33,7 +33,7 @@ class App extends React.Component {
         <h1 className="cover-heading space-after">react-weather-display</h1>
         <WeatherDisplay height="400px" width="400px"
           currentTemperature={this.state.currentTemperature}
-          hvacMode={this.state.hvacMode}
+          currentCondition={this.state.currentCondition}
         />
         <div className="row space-before">
           <div className="col-md-6">
@@ -47,13 +47,14 @@ class App extends React.Component {
           </div>
           <div className="col-md-6">
             <div className="form-group">
-              <label htmlFor="hvacModePicker">State</label>
-              <select id="hvacModePicker" className="selectpicker"
-                onChange={this.handleHvacModeChange}
+              <label htmlFor="currentConditionPicker">condition</label>
+              <select id="currentConditionPicker" className="selectpicker"
+                onChange={this.handleForecastChange}
               >
-                <option value="off">Off</option>
-                <option value="heating">Heating</option>
-                <option value="cooling">Cooling</option>
+                <option value="sunny">Sunny</option>
+                <option value="cloudy">Cloudy</option>
+                <option value="rainy">Rainy</option>
+                <option value="stormy">Stormy</option>
               </select>
             </div>
           </div>
