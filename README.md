@@ -23,4 +23,4 @@ You can run built-in demo example via few simple steps:<br />
 - `height` (Integer) - the desired height of the component in pixels
 - `currentTemperature` (Integer) - actual temperature detected for the location
 - `currentCondition` (Enum) - actual current weather condition detected for the location
-  - sunny, cloudy, rainy, stormy
+  - sunny, cloudy, rainy, stormy, snowy
