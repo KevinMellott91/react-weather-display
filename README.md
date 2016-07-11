@@ -24,3 +24,6 @@ You can run built-in demo example via few simple steps:<br />
 - `currentTemperature` (Integer) - actual temperature detected for the location
 - `currentCondition` (Enum) - actual current weather condition detected for the location
   - sunny, cloudy, rainy, stormy, snowy
+
+### Inspiration
+The [weather condition images](http://jaan-jaak.deviantart.com/art/Weather-Icon-Set-331363831) were originally created by [Jean-Jacques Rossouw](http://jaan-jaak.deviantart.com/), and we were inspired to incorporate them into this control.
