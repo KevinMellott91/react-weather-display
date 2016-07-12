@@ -1,6 +1,6 @@
 {
   "name": "react-weather-display",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A React.js component for displaying basic weather conditions.",
   "main": "dist/react-weather-display.js",
   "scripts": {

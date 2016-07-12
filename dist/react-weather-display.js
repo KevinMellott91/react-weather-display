@@ -40,8 +40,7 @@ class WeatherDisplay extends React.Component {
       { style: {
           width: this.props.width,
           height: this.props.height,
-          position: 'relative',
-          margin: 'auto'
+          position: 'relative'
         }
       },
       React.createElement('img', { id: 'weatherImage', src: this.getForecastImage(), style: {
@@ -55,9 +54,13 @@ class WeatherDisplay extends React.Component {
       React.createElement(
         'h1',
         { id: 'weatherValue', style: {
+            width,
             fontSize: fontsize,
-            position: 'relative',
+            position: 'absolute',
             top: (this.props.height - fontsize) / 2,
+            left: (this.props.width - width) / 2,
+            margin: '0 0 0 0',
+            textAlign: 'center',
             textShadow: `${ fontsize * 0.05 }px ${ fontsize * 0.05 }px #111111`,
             color: 'white'
           }
