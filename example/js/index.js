@@ -32,7 +32,9 @@ class App extends React.Component {
       <div>
         <h1 className="cover-heading space-after">react-weather-display</h1>
         <div id="weatherDiv" style={{ margin: 'auto', width: '400px' }} >
-          <WeatherDisplay height="400" width="400"
+          <WeatherDisplay
+            height={400}
+            width={400}
             currentTemperature={this.state.currentTemperature}
             currentCondition={this.state.currentCondition}
           />
