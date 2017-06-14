@@ -10,6 +10,10 @@ View the [live demo](https://run.plnkr.co/plunks/c752wk/)! Note that this demo u
 npm install react-weather-display
 ```
 
+### Simple Preview
+
+![Preview](http://i.imgur.com/gNUyJPH.png)
+
 ### Props
 
  - **width**       - Set the width of the wrapper div.   Defaults to 100%.
