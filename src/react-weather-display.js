@@ -1,88 +1,101 @@
-'use strict';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-const React = require('react');
+const getDefaultConditions = conditions => ({
+  sunny:   'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/sunny.png',
+  cloudy:  'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/cloudy.png',
+  rainy:   'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/rain.png',
+  stormy:  'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/tstorms.png',
+  snow:    'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/snow.png',
+  default: 'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/mostlysunny.png',
+  ...conditions
+})
 
-class WeatherDisplay extends React.Component {
-  getStyles() {
-    return {
-      test: {
-        WebkitUserSelect: 'none',
-        MozUserSelect: 'none',
-        msUserSelect: 'none',
-        userSelect: 'none',
-      },
-    };
+class ReactWeatherDisplay extends Component {
+
+  constructor(props, context) {
+    super(props, context)
+    this.conditions = getDefaultConditions(props.conditions)
   }
 
-  getForecastImage() {
-    switch (this.props.currentCondition) {
-      case 'sunny':
-        return 'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/sunny.png';
-      case 'cloudy':
-        return 'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/cloudy.png';
-      case 'rainy':
-        return 'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/rain.png';
-      case 'stormy':
-        return 'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/tstorms.png';
-      case 'snowy':
-        return 'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/snow.png';
-      default:
-        return 'https://raw.githubusercontent.com/KevinMellott91/react-weather-display/master/images/mostlysunny.png';
-    }
-  }
+  getForecastImage = () =>
+    this.conditions[this.props.currentCondition] || this.conditions.default
 
   render() {
-    const width = this.props.width * 0.6;
-    const fontsize = width * 0.25;
-    // Piece it all together to form the weather display.
+    const { textShadow } = this.props
+
+    const width    = this.props.width * 0.6;
+    const fontSize = width * 0.25;
+
+    const flexCentered = {
+      display:        'flex',
+      alignItems:     'center',
+      justifyContent: 'center',
+    }
+
+    const wrapperStyle = {
+      position:       'relative',
+      width:          this.props.width,
+      height:         this.props.height,
+      ...flexCentered
+    }
+
+    const absolutelyFilled = {
+      position: 'absolute',
+      top:    0,
+      bottom: 0,
+      left:   0,
+      right:  0,
+    }
+
+    const weatherContainerStyle = {
+      ...absolutelyFilled,
+      backgroundImage:    `url(${this.getForecastImage()})`,
+      backgroundPosition: 'center',
+      backgroundRepeat:   'no-repeat',
+      backgroundSize:     'contain',
+      zIndex: 1,
+    }
+
+    const containerStyle = {
+      ...absolutelyFilled,
+      textShadow,
+      fontSize,
+      fontWeight: 'bold',
+      textAlign:  'center',
+      color:      'white',
+      zIndex:     2,
+      ...flexCentered
+    }
+
     return (
-      <div style={{
-        width: this.props.width,
-        height: this.props.height,
-        position: 'relative',
-      }}
-      >
-        <img id="weatherImage" src={this.getForecastImage()} style={{
-          width,
-          height: width,
-          position: 'absolute',
-          left: (this.props.width - width) / 2,
-          top: (this.props.height - width) / 2,
-        }}
-        />
-        <h1 id="weatherValue" style={{
-          width,
-          fontSize: fontsize,
-          position: 'absolute',
-          top: (this.props.height - fontsize) / 2,
-          left: (this.props.width - width) / 2,
-          margin: '0 0 0 0',
-          textAlign: 'center',
-          textShadow: `${(fontsize * 0.05)}px ${(fontsize * 0.05)}px #111111`,
-          color: 'white',
-        }}
-        >{this.props.currentTemperature}{'\u00B0'}</h1>
+      <div style={wrapperStyle}>
+        <div style={weatherContainerStyle} />
+        <div style={containerStyle}>
+          {this.props.currentTemperature}{'\u00B0'}
+        </div>
       </div>
-    );
+    )
   }
 }
 
-WeatherDisplay.propTypes = {
+ReactWeatherDisplay.propTypes = {
   /* Width of component in pixels */
-  width: React.PropTypes.number,
+  width: PropTypes.number,
   /* Height of component in pixels */
-  height: React.PropTypes.number,
+  height: PropTypes.number,
   /* Actual temperature detected for the location */
-  currentTemperature: React.PropTypes.number,
+  currentTemperature: PropTypes.number,
   /* The forcast to display */
-  currentCondition: React.PropTypes.oneOf(['sunny', 'cloudy', 'rainy', 'stormy', 'snowy']),
-};
+  currentCondition: PropTypes.oneOf(['sunny', 'cloudy', 'rainy', 'stormy', 'snowy']),
+}
 
-WeatherDisplay.defaultProps = {
-  width: 1280,
-  height: 720,
-  currentTemperature: 70,
-  currentCondition: 'sunny',
-};
+ReactWeatherDisplay.defaultProps = {
+  width:  '100%',
+  height: '100%',
+  currentTemperature: 0,
+  currentCondition:   'default',
+  textShadow: '1px 1px 2px rgba(50,50,50,0.8)'
+}
 
-module.exports = WeatherDisplay;
+export default ReactWeatherDisplay
