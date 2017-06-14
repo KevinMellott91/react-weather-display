@@ -18,8 +18,26 @@ class ReactWeatherDisplay extends Component {
     this.conditions = getDefaultConditions(props.conditions)
   }
 
-  getForecastImage = () =>
-    this.conditions[this.props.currentCondition] || this.conditions.default
+  componentWillReceiveProps(np) {
+    if ( this.props.conditions !== np.conditions ) {
+      this.conditions = getDefaultConditions(np.conditions)
+    }
+  }
+
+  getCurrentCondition = () =>
+    this.props.condition || this.props.currentCondition
+
+  getForecastImage = () => {
+    const condition = this.conditions[this.getCurrentCondition()] || this.conditions.default
+    if ( condition.startsWith('http') ) {
+      return `url(${condition})`
+    } else {
+      return condition
+    }
+  }
+
+  getCurrentTemperature = () =>
+    this.props.temperature || this.props.currentTemperature
 
   render() {
     const { textShadow } = this.props
@@ -37,6 +55,8 @@ class ReactWeatherDisplay extends Component {
       position:       'relative',
       width:          this.props.width,
       height:         this.props.height,
+      opacity:        this.props.isVisible ? this.props.opacity : 0,
+      transition:     this.props.transition,
       ...flexCentered
     }
 
@@ -50,7 +70,7 @@ class ReactWeatherDisplay extends Component {
 
     const weatherContainerStyle = {
       ...absolutelyFilled,
-      backgroundImage:    `url(${this.getForecastImage()})`,
+      backgroundImage:    this.getForecastImage(),
       backgroundPosition: 'center',
       backgroundRepeat:   'no-repeat',
       backgroundSize:     'contain',
@@ -72,7 +92,7 @@ class ReactWeatherDisplay extends Component {
       <div style={wrapperStyle}>
         <div style={weatherContainerStyle} />
         <div style={containerStyle}>
-          {this.props.currentTemperature}{'\u00B0'}
+          {this.getCurrentTemperature()}{'\u00B0'}
         </div>
       </div>
     )
@@ -81,21 +101,29 @@ class ReactWeatherDisplay extends Component {
 
 ReactWeatherDisplay.propTypes = {
   /* Width of component in pixels */
-  width: PropTypes.number,
+  width: PropTypes.any,
   /* Height of component in pixels */
-  height: PropTypes.number,
+  height: PropTypes.any,
+  isVisible: PropTypes.bool,
+  transition: PropTypes.string,
+  opacity: PropTypes.number,
   /* Actual temperature detected for the location */
   currentTemperature: PropTypes.number,
+  temperature: PropTypes.number,
   /* The forcast to display */
   currentCondition: PropTypes.oneOf(['sunny', 'cloudy', 'rainy', 'stormy', 'snowy']),
+  condition: PropTypes.oneOf(['sunny', 'cloudy', 'rainy', 'stormy', 'snowy']),
 }
 
 ReactWeatherDisplay.defaultProps = {
   width:  '100%',
   height: '100%',
-  currentTemperature: 0,
-  currentCondition:   'default',
-  textShadow: '1px 1px 2px rgba(50,50,50,0.8)'
+  temperature: 0,
+  opacity:     1,
+  isVisible:   true,
+  condition:   'default',
+  textShadow: '1px 1px 2px rgba(50,50,50,0.8)',
+  transition: 'opacity 0.5s ease'
 }
 
 export default ReactWeatherDisplay
