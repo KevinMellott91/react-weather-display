@@ -11,6 +11,34 @@ const getDefaultConditions = conditions => ({
   ...conditions
 })
 
+const textStyles = {
+  fontWeight: 'bold',
+  textAlign:  'center',
+  color:      'white',
+  zIndex:     2,
+}
+
+const flexCentered = {
+  display:        'flex',
+  alignItems:     'center',
+  justifyContent: 'center',
+}
+
+const backgroundImageStyles = {
+  backgroundPosition: 'center',
+  backgroundRepeat:   'no-repeat',
+  backgroundSize:     'contain',
+}
+
+const absolutelyFilled = {
+  position: 'absolute',
+  top:    0,
+  bottom: 0,
+  left:   0,
+  right:  0,
+  zIndex: 1,
+}
+
 class ReactWeatherDisplay extends Component {
 
   constructor(props, context) {
@@ -45,47 +73,30 @@ class ReactWeatherDisplay extends Component {
     const width    = this.props.width * 0.6;
     const fontSize = width * 0.25;
 
-    const flexCentered = {
-      display:        'flex',
-      alignItems:     'center',
-      justifyContent: 'center',
-    }
-
     const wrapperStyle = {
       position:       'relative',
       width:          this.props.width,
       height:         this.props.height,
       opacity:        this.props.isVisible ? this.props.opacity : 0,
       transition:     this.props.transition,
-      ...flexCentered
-    }
-
-    const absolutelyFilled = {
-      position: 'absolute',
-      top:    0,
-      bottom: 0,
-      left:   0,
-      right:  0,
+      ...flexCentered,
+      ...this.props.wrapperStyle,
     }
 
     const weatherContainerStyle = {
+      backgroundImage: this.getForecastImage(),
       ...absolutelyFilled,
-      backgroundImage:    this.getForecastImage(),
-      backgroundPosition: 'center',
-      backgroundRepeat:   'no-repeat',
-      backgroundSize:     'contain',
-      zIndex: 1,
+      ...backgroundImageStyles,
+      ...this.props.conditionStyle,
     }
 
     const containerStyle = {
-      ...absolutelyFilled,
       textShadow,
       fontSize,
-      fontWeight: 'bold',
-      textAlign:  'center',
-      color:      'white',
-      zIndex:     2,
-      ...flexCentered
+      ...absolutelyFilled,
+      ...textStyles,
+      ...flexCentered,
+      ...this.props.temperatureStyle,
     }
 
     return (
@@ -113,6 +124,9 @@ ReactWeatherDisplay.propTypes = {
   /* The forcast to display */
   currentCondition: PropTypes.oneOf(['sunny', 'cloudy', 'rainy', 'stormy', 'snowy']),
   condition: PropTypes.oneOf(['sunny', 'cloudy', 'rainy', 'stormy', 'snowy']),
+  temperatureStyle: PropTypes.object,
+  wrapperStyle:     PropTypes.object,
+  conditionStyle:   PropTypes.object,
 }
 
 ReactWeatherDisplay.defaultProps = {
@@ -123,7 +137,7 @@ ReactWeatherDisplay.defaultProps = {
   isVisible:   true,
   condition:   'default',
   textShadow: '1px 1px 2px rgba(50,50,50,0.8)',
-  transition: 'opacity 0.5s ease'
+  transition: 'opacity 0.5s ease',
 }
 
 export default ReactWeatherDisplay

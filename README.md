@@ -25,6 +25,9 @@ npm install react-weather-display
  - **isVisible**   - Sets the wrapper div to opacity to this.props.opacity or 0.
  - **transition**  - Optionally override the transition used on the wrapper div.
  - **textShadow**  - Optionally override the textShadow property on the temperature.  Defaults to "1px 1px 1px rgba(50,50,50,0.8)"
+ - **wrapperStyle**     - Optionally add to the wrapper div's style properties.
+ - **conditionStyle**   - Optionally add to the div which displays the weather condition image.
+ - **temperatureStyle** - Optionally add to the div which displays the current temperature.
 
 > currentTemperature and currentCondition are also supported for backwards compatibility with the
 > original version of the package.
