@@ -4,7 +4,8 @@
   "description": "A React.js component for displaying basic weather conditions.",
   "main": "dist/react-weather-display.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --require co-mocha",
+    "basic-example": "npm run compile && browserify -t [ babelify --presets [ react ] ] example/js/index.js -o example/js/bundle.js && node example/js/basic.js",
+    "compile": "babel --presets react src/react-weather-display.js --out-file dist/react-weather-display.js",
     "prepublish": "npm run build",
     "build": "cross-env-shell BABEL_ENV=production NODE_ENV=production \"rimraf dist && webpack\"",
     "start": "micro examples/react-weather-display"
