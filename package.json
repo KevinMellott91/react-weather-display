@@ -6,7 +6,9 @@
   "scripts": {
     "basic-example": "npm run compile && browserify -t [ babelify --presets [ react ] ] example/js/index.js -o example/js/bundle.js && node example/js/basic.js",
     "compile": "babel --presets react src/react-weather-display.js --out-file dist/react-weather-display.js",
-    "prepublish": "npm run compile"
+    "prepublish": "npm run build",
+    "build": "cross-env-shell BABEL_ENV=production NODE_ENV=production \"rimraf dist && webpack\"",
+    "start": "micro examples/react-weather-display"
   },
   "files": [
     "dist"
@@ -42,21 +44,22 @@
   },
   "homepage": "https://github.com/kevinmellott91/react-weather-display",
   "devDependencies": {
-    "babel-preset-react": "6.5.0",
-    "babel-cli": "6.5.0",
-    "babelify": "7.2.0",
-    "browserify": "13.0.0",
-    "eslint": "^2.4.0",
-    "eslint-config-airbnb": "^6.2.0",
-    "eslint-plugin-react": "^4.2.3",
-    "express": "4.13.4",
-    "path": "0.12.7",
-    "react": "0.14.7",
-    "react-dom": "0.14.7"
+    "babel-cli": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-babili": "^0.1.2",
+    "babel-preset-env": "^1.5.1",
+    "babili-webpack-plugin": "^0.1.1",
+    "cross-env": "^5.0.0",
+    "rimraf": "^2.6.1",
+    "webpack": "^2.6.1",
+    "webpack-node-externals": "^1.6.0",
+    "yargs": "^8.0.1"
   },
   "peerDependencies": {},
   "browserDependencies": {},
   "dependencies": {
-    "react": "0.14.7"
+    "prop-types": "^15.5.10",
+    "react": "^15.6.0"
   }
 }
